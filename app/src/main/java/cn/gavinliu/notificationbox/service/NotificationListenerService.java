@@ -5,6 +5,10 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.service.notification.StatusBarNotification;
 
+import cn.gavinliu.notificationbox.NotificationBoxApp;
+import cn.gavinliu.notificationbox.model.NotificationInfo;
+import cn.gavinliu.notificationbox.utils.DbUtils;
+
 /**
  * Created by Gavin on 2016/10/11.
  */
@@ -44,11 +48,14 @@ public class NotificationListenerService extends android.service.notification.No
     @Override
     public void onNotificationPosted(StatusBarNotification sbn) {
         super.onNotificationPosted(sbn);
-
         Notification notification = sbn.getNotification();
 
+        String packageName = sbn.getPackageName();
+        long time = sbn.getPostTime();
         String title = notification.extras.getString(Notification.EXTRA_TITLE);
         String text = notification.extras.getString(Notification.EXTRA_TEXT);
+
+        DbUtils.saveNotification(new NotificationInfo(packageName, title, text, time));
     }
 
     @Override
