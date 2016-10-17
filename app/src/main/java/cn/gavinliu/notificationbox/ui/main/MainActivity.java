@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -14,6 +15,8 @@ import cn.gavinliu.notificationbox.R;
 import cn.gavinliu.notificationbox.utils.CommonUtils;
 
 public class MainActivity extends AppCompatActivity {
+
+    private MainPresenter mMainPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                mMainPresenter.addApp();
             }
         });
 
@@ -43,6 +46,18 @@ public class MainActivity extends AppCompatActivity {
                     .show();
         }
 
+        MainFragment mainFragment = (MainFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.fragment_main);
+
+        if (mainFragment == null) {
+            mainFragment = MainFragment.newInstance();
+
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.content, mainFragment)
+                    .commit();
+        }
+
+        mMainPresenter = new MainPresenter(mainFragment);
     }
 
     @Override

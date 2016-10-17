@@ -29,6 +29,10 @@
             </intent-filter>
         </service>
 
+        <activity
+            android:name=".ui.applist.AppListActivity"
+            android:label="@string/activity_applist"/>
+
     </application>
 
 </manifest>

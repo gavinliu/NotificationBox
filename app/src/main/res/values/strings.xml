@@ -3,4 +3,7 @@
     <string name="action_settings">Settings</string>
 
     <string name="service_name">Notification Listener Service</string>
+
+    <string name="activity_applist">App List</string>
+
 </resources>

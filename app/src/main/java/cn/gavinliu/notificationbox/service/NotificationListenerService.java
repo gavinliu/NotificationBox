@@ -41,11 +41,6 @@ public class NotificationListenerService extends android.service.notification.No
     }
 
     @Override
-    public void onNotificationPosted(StatusBarNotification sbn, RankingMap rankingMap) {
-        super.onNotificationPosted(sbn, rankingMap);
-    }
-
-    @Override
     public void onNotificationPosted(StatusBarNotification sbn) {
         super.onNotificationPosted(sbn);
         Notification notification = sbn.getNotification();
