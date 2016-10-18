@@ -17,15 +17,17 @@ public class AppListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_applist);
 
-        AppListFragment mainFragment = (AppListFragment) getSupportFragmentManager()
+        AppListFragment appListFragment = (AppListFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.fragment_applist);
 
-        if (mainFragment == null) {
-            mainFragment = AppListFragment.newInstance();
+        if (appListFragment == null) {
+            appListFragment = AppListFragment.newInstance();
 
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.content, mainFragment)
+                    .add(R.id.content, appListFragment)
                     .commit();
         }
+
+        new AppListPresenter(appListFragment);
     }
 }
