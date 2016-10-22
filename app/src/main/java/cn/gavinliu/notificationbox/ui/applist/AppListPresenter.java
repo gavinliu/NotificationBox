@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import java.util.List;
 
 import cn.gavinliu.notificationbox.model.AppInfo;
+import cn.gavinliu.notificationbox.utils.DbUtils;
 import cn.gavinliu.notificationbox.utils.PackageUtils;
 import rx.Observable;
 import rx.Observer;
@@ -71,5 +72,16 @@ public class AppListPresenter implements AppListContract.Presenter {
     @Override
     public void unsubscribe() {
         mSubscriptions.clear();
+    }
+
+
+    @Override
+    public void saveApp(AppInfo app) {
+        DbUtils.saveApp(app);
+    }
+
+    @Override
+    public void deleteApp(AppInfo app) {
+        DbUtils.deleteApp(app);
     }
 }

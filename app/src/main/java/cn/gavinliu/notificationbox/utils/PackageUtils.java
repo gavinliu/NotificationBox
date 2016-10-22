@@ -3,6 +3,7 @@ package cn.gavinliu.notificationbox.utils;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +36,21 @@ public class PackageUtils {
                         appInfos.add(app);
                     }
                 }
+
+                List<AppInfo> db = DbUtils.getApp();
+                List<AppInfo> temp = new ArrayList<>();
+
+                for (AppInfo info : appInfos) {
+                    for (AppInfo a : db) {
+                        if (a.getPackageName().equals(info.getPackageName())) {
+                            info.setSelect(true);
+                            temp.add(info);
+                        }
+                    }
+                }
+
+                appInfos.removeAll(temp);
+                appInfos.addAll(0, temp);
 
                 subscriber.onNext(appInfos);
             }

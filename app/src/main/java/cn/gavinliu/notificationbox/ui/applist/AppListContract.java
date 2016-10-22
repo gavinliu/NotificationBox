@@ -17,10 +17,15 @@ public interface AppListContract {
     interface Presenter extends BasePresenter {
 
         void startLoad(PackageManager pm);
+
+        void saveApp(AppInfo app);
+
+        void deleteApp(AppInfo app);
     }
 
     interface View extends BaseView<Presenter> {
 
         void showAppList(List<AppInfo> appList);
+
     }
 }

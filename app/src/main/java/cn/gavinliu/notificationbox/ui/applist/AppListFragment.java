@@ -12,6 +12,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -71,18 +73,30 @@ public class AppListFragment extends Fragment implements AppListContract.View {
 
     @Override
     public void showAppList(List<AppInfo> appList) {
-        mRecyclerView.setAdapter(new Adapter(getContext(), appList));
+        mRecyclerView.setAdapter(new Adapter(getContext(), appList, mItemListener));
     }
 
-    
+    private ItemListener mItemListener = new ItemListener() {
+        @Override
+        public void onCheckBoxSelect(boolean isChecked, AppInfo app) {
+            if (isChecked) {
+                mPresenter.saveApp(app);
+            } else {
+                mPresenter.deleteApp(app);
+            }
+        }
+    };
+
     private static class Adapter extends RecyclerView.Adapter<ViewHolder> {
 
         Context context;
         List<AppInfo> appList;
+        private ItemListener itemListener;
 
-        public Adapter(Context context, List<AppInfo> appList) {
+        public Adapter(Context context, List<AppInfo> appList, ItemListener itemListener) {
             this.context = context;
             this.appList = appList;
+            this.itemListener = itemListener;
         }
 
         @Override
@@ -92,10 +106,18 @@ public class AppListFragment extends Fragment implements AppListContract.View {
 
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
-            AppInfo app = appList.get(position);
+            final AppInfo app = appList.get(position);
 
             holder.mIconView.setImageDrawable(app.getIcon());
             holder.mNameView.setText(app.getAppName());
+            holder.mCheckBox.setChecked(app.isSelect());
+
+            holder.mCheckBox.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    itemListener.onCheckBoxSelect(((CheckBox) v).isChecked(), app);
+                }
+            });
         }
 
         @Override
@@ -108,13 +130,20 @@ public class AppListFragment extends Fragment implements AppListContract.View {
 
         private ImageView mIconView;
         private TextView mNameView;
+        private CheckBox mCheckBox;
+
 
         public ViewHolder(View itemView) {
             super(itemView);
 
             mIconView = (ImageView) itemView.findViewById(R.id.icon);
             mNameView = (TextView) itemView.findViewById(R.id.name);
+            mCheckBox = (CheckBox) itemView.findViewById(R.id.checkbox);
         }
+    }
+
+    public interface ItemListener {
+        void onCheckBoxSelect(boolean isChecked, AppInfo app);
     }
 
 }
