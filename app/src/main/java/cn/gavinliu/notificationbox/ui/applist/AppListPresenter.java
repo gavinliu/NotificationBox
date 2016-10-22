@@ -41,6 +41,7 @@ public class AppListPresenter implements AppListContract.Presenter {
 
     @Override
     public void startLoad(PackageManager pm) {
+        mView.showProgress(true);
         Subscription subscription = PackageUtils.getInstallPackages(pm)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -57,6 +58,7 @@ public class AppListPresenter implements AppListContract.Presenter {
 
                     @Override
                     public void onNext(List<AppInfo> list) {
+                        mView.showProgress(false);
                         mView.showAppList(list);
                     }
                 });

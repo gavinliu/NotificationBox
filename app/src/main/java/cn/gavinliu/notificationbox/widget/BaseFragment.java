@@ -6,6 +6,6 @@ import android.support.v4.app.Fragment;
  * Created by Gavin on 16-10-17.
  */
 
-public class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment {
 
 }

@@ -25,6 +25,8 @@ public interface AppListContract {
 
     interface View extends BaseView<Presenter> {
 
+        void showProgress(boolean isShown);
+
         void showAppList(List<AppInfo> appList);
 
     }

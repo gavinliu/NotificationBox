@@ -56,4 +56,20 @@ public class PackageUtils {
             }
         });
     }
+
+    public static Observable<List<AppInfo>> getAppDbList(final PackageManager pm) {
+        return Observable.create(new Observable.OnSubscribe<List<AppInfo>>() {
+
+            @Override
+            public void call(Subscriber<? super List<AppInfo>> subscriber) {
+                List<AppInfo> db = DbUtils.getApp();
+                for (AppInfo app : db) {
+
+                }
+
+                subscriber.onNext(db);
+            }
+        });
+    }
+
 }
