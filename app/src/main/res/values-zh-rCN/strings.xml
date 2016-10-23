@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">消息盒子</string>
+    <string name="action_settings">设置</string>
+
+    <string name="service_name">消息监听服务</string>
+
+    <string name="activity_applist">应用列表</string>
+
+</resources>

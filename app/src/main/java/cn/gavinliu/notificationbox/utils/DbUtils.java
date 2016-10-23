@@ -1,5 +1,6 @@
 package cn.gavinliu.notificationbox.utils;
 
+import com.litesuits.orm.db.assit.QueryBuilder;
 import com.litesuits.orm.db.assit.WhereBuilder;
 
 import java.util.List;
@@ -15,14 +16,13 @@ import cn.gavinliu.notificationbox.model.NotificationInfo;
 public class DbUtils {
 
     public static void saveNotification(NotificationInfo info) {
+        if (info.getTitle() == null || info.getText() == null) return;
         NotificationBoxApp.getLiteOrm().save(info);
     }
 
-    public static List<NotificationInfo> getNotification() {
-        return NotificationBoxApp.getLiteOrm().query(NotificationInfo.class);
-    }
-
-    public static void getNotification(String packageName) {
+    public static List<NotificationInfo> getNotification(String packageName) {
+        return NotificationBoxApp.getLiteOrm().query(new QueryBuilder<NotificationInfo>(NotificationInfo.class)
+                .where("packageName = ?", packageName).orderBy("time desc"));
     }
 
     public static List<AppInfo> getApp() {

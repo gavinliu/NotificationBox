@@ -5,6 +5,9 @@ import android.content.ComponentName;
 import android.provider.Settings;
 import android.text.TextUtils;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by Gavin on 2016/10/12.
  */
@@ -18,10 +21,18 @@ public class CommonUtils {
             for (String name : names) {
                 ComponentName cn = ComponentName.unflattenFromString(name);
                 if (cn != null) {
-                    return activity.getPackageName().equals(cn.getPackageName());
+                    if (activity.getPackageName().equals(cn.getPackageName())) {
+                        return true;
+                    }
                 }
             }
         }
         return false;
+    }
+
+    public static String getTimeStr(long time) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date(time);
+        return format.format(date);
     }
 }

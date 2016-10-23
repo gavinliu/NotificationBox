@@ -3,7 +3,7 @@ package cn.gavinliu.notificationbox.ui.applist;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,14 +44,15 @@ public class AppListFragment extends BaseListFragment implements AppListContract
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-        getActivity().setResult(0);
+    public void setupActionBar(ActionBar actionBar) {
+        actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
-    protected void setupRecyclerView(RecyclerView recyclerView) {
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+    public void onDestroy() {
+        super.onDestroy();
+        if (mPresenter != null) mPresenter.unsubscribe();
+        getActivity().setResult(0);
     }
 
     @Override
@@ -107,7 +108,9 @@ public class AppListFragment extends BaseListFragment implements AppListContract
             holder.mCheckBox.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    itemListener.onCheckBoxSelect(((CheckBox) v).isChecked(), app);
+                    boolean isChecked = ((CheckBox) v).isChecked();
+                    app.setSelect(isChecked);
+                    itemListener.onCheckBoxSelect(isChecked, app);
                 }
             });
         }
@@ -134,7 +137,7 @@ public class AppListFragment extends BaseListFragment implements AppListContract
         }
     }
 
-    public interface ItemListener {
+    private interface ItemListener {
         void onCheckBoxSelect(boolean isChecked, AppInfo app);
     }
 

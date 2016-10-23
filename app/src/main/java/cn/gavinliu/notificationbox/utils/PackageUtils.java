@@ -1,8 +1,10 @@
 package cn.gavinliu.notificationbox.utils;
 
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -24,17 +26,18 @@ public class PackageUtils {
             public void call(Subscriber<? super List<AppInfo>> subscriber) {
                 List<AppInfo> appInfos = new ArrayList<>();
 
-                List<PackageInfo> mPacks = pm.getInstalledPackages(0);
-                for (PackageInfo info : mPacks) {
-                    if ((info.applicationInfo.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) == 0) {
-                        AppInfo app = new AppInfo();
+                Intent intent = new Intent();
+                intent.addCategory(Intent.CATEGORY_LAUNCHER);
+                intent.setAction(Intent.ACTION_MAIN);
+                List<ResolveInfo> resolveInfoList = pm.queryIntentActivities(intent, 0);
 
-                        app.setIcon(info.applicationInfo.loadIcon(pm));
-                        app.setAppName(info.applicationInfo.loadLabel(pm).toString());
-                        app.setPackageName(info.packageName);
+                for (ResolveInfo info : resolveInfoList) {
+                    AppInfo app = new AppInfo();
+                    app.setIcon(info.loadIcon(pm));
+                    app.setAppName(info.loadLabel(pm).toString());
+                    app.setPackageName(info.activityInfo.packageName);
 
-                        appInfos.add(app);
-                    }
+                    appInfos.add(app);
                 }
 
                 List<AppInfo> db = DbUtils.getApp();
@@ -62,12 +65,27 @@ public class PackageUtils {
 
             @Override
             public void call(Subscriber<? super List<AppInfo>> subscriber) {
-                List<AppInfo> db = DbUtils.getApp();
-                for (AppInfo app : db) {
+                List<AppInfo> appInfos = new ArrayList<>();
 
+
+                List<AppInfo> db = DbUtils.getApp();
+
+                Intent intent = new Intent();
+                intent.addCategory(Intent.CATEGORY_LAUNCHER);
+                intent.setAction(Intent.ACTION_MAIN);
+                List<ResolveInfo> resolveInfoList = pm.queryIntentActivities(intent, 0);
+
+                for (ResolveInfo info : resolveInfoList) {
+                    for (AppInfo app : db) {
+                        if (info.activityInfo.packageName.equals(app.getPackageName())) {
+                            app.setIcon(info.loadIcon(pm));
+
+                            appInfos.add(app);
+                        }
+                    }
                 }
 
-                subscriber.onNext(db);
+                subscriber.onNext(appInfos);
             }
         });
     }

@@ -23,7 +23,9 @@
         <service
             android:name=".service.NotificationListenerService"
             android:label="@string/service_name"
-            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE"
+            android:persistent="true"
+            android:process=":remote">
             <intent-filter>
                 <action android:name="android.service.notification.NotificationListenerService"/>
             </intent-filter>
@@ -32,6 +34,13 @@
         <activity
             android:name=".ui.applist.AppListActivity"
             android:label="@string/activity_applist"/>
+
+        <activity
+            android:name=".ui.detail.DetailActivity"/>
+
+        <activity
+            android:name=".ui.setting.SettingActivity"
+            android:label="@string/action_settings"/>
 
     </application>
 

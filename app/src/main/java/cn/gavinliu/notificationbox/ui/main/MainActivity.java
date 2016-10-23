@@ -12,10 +12,12 @@ import android.view.MenuItem;
 import android.view.View;
 
 import cn.gavinliu.notificationbox.R;
+import cn.gavinliu.notificationbox.service.NotificationListenerService;
 import cn.gavinliu.notificationbox.utils.CommonUtils;
 
 public class MainActivity extends AppCompatActivity {
 
+    FloatingActionButton mFloatingActionButton;
     private MainPresenter mMainPresenter;
 
     @Override
@@ -26,25 +28,13 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        mFloatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
+        mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mMainPresenter.addApp();
             }
         });
-
-        if (!CommonUtils.checkNotificationReadPermission(this)) {
-            Snackbar.make(fab, "检测到没有权限", Snackbar.LENGTH_INDEFINITE)
-                    .setAction("设置", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent intent = new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS");
-                            startActivity(intent);
-                        }
-                    })
-                    .show();
-        }
 
         MainFragment mainFragment = (MainFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.fragment_main);
@@ -58,6 +48,22 @@ public class MainActivity extends AppCompatActivity {
         }
 
         mMainPresenter = new MainPresenter(mainFragment);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!CommonUtils.checkNotificationReadPermission(this)) {
+            Snackbar.make(mFloatingActionButton, "检测到没有权限", Snackbar.LENGTH_INDEFINITE)
+                    .setAction("设置", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS");
+                            startActivity(intent);
+                        }
+                    })
+                    .show();
+        }
     }
 
     @Override

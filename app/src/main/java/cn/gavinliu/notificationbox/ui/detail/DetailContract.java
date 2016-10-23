@@ -1,5 +1,8 @@
 package cn.gavinliu.notificationbox.ui.detail;
 
+import java.util.List;
+
+import cn.gavinliu.notificationbox.model.NotificationInfo;
 import cn.gavinliu.notificationbox.ui.BasePresenter;
 import cn.gavinliu.notificationbox.ui.BaseView;
 
@@ -10,8 +13,15 @@ import cn.gavinliu.notificationbox.ui.BaseView;
 public interface DetailContract {
 
     interface Presenter extends BasePresenter {
+
+        void startLoad(String packageName);
+
     }
 
     interface View extends BaseView<Presenter> {
+
+        void showProgress(boolean isShown);
+
+        void showNotifications(List<NotificationInfo> notifications);
     }
 }

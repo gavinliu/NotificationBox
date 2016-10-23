@@ -1,6 +1,7 @@
 package cn.gavinliu.notificationbox.widget;
 
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,5 +55,7 @@ public abstract class BaseListFragment extends BaseFragment {
         mProgressLayout.setVisibility(View.GONE);
     }
 
-    protected abstract void setupRecyclerView(RecyclerView recyclerView);
+    protected void setupRecyclerView(RecyclerView recyclerView) {
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+    }
 }
