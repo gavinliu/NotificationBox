@@ -43,14 +43,15 @@ public class MainFragment extends BaseListFragment implements MainContract.View 
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (mPresenter != null) mPresenter.unsubscribe();
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (mPresenter != null) mPresenter.startLoad(getActivity().getPackageManager());
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    public void onDestroy() {
+        super.onDestroy();
+        if (mPresenter != null) mPresenter.unsubscribe();
     }
 
     @Override
