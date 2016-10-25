@@ -13,6 +13,7 @@ import android.view.View;
 
 import cn.gavinliu.notificationbox.R;
 import cn.gavinliu.notificationbox.service.NotificationListenerService;
+import cn.gavinliu.notificationbox.ui.setting.SettingActivity;
 import cn.gavinliu.notificationbox.utils.CommonUtils;
 
 public class MainActivity extends AppCompatActivity {
@@ -77,6 +78,8 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.action_settings) {
+            Intent intent = new Intent(this, SettingActivity.class);
+            startActivity(intent);
             return true;
         }
 
