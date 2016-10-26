@@ -1,9 +1,19 @@
 <resources>
     <string name="app_name">消息盒子</string>
-    <string name="action_settings">设置</string>
-
     <string name="service_name">消息监听服务</string>
 
-    <string name="activity_applist">应用列表</string>
+    <string name="activity_applist">软件列表</string>
+
+    <string name="action_settings">设置</string>
+
+    <string name="feature">功能</string>
+    <string name="about">关于</string>
+    <string name="open_source">开放源码</string>
+    <string name="reminder">拦截提醒</string>
+    <string name="reminder_summary">拦截到消息后提醒</string>
+    <string name="permission">配置权限</string>
+    <string name="permission_summary">如果拦截失效，请重新配置权限。（关闭后再打开）</string>
+
+    <string name="no_read_notification_promission">没有监听通知栏的权限</string>
 
 </resources>

@@ -1,9 +1,19 @@
 <resources>
-    <string name="app_name">NotificationBox</string>
-    <string name="action_settings">Settings</string>
+    <string name="app_name">消息盒子</string>
+    <string name="service_name">消息監聽服務</string>
 
-    <string name="service_name">Notification Listener Service</string>
+    <string name="activity_applist">軟件列表</string>
 
-    <string name="activity_applist">App List</string>
+    <string name="action_settings">設置</string>
+
+    <string name="feature">功能</string>
+    <string name="about">關於</string>
+    <string name="open_source">開放源碼</string>
+    <string name="reminder">攔截提醒</string>
+    <string name="reminder_summary">攔截到消息後提醒</string>
+    <string name="permission">配置權限</string>
+    <string name="permission_summary">如果攔截失效，請重新配置權限。（關閉後再打開）</string>
+
+    <string name="no_read_notification_promission">沒有監聽通知欄的權限</string>
 
 </resources>

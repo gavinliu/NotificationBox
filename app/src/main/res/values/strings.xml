@@ -1,9 +1,19 @@
 <resources>
     <string name="app_name">NotificationBox</string>
-    <string name="action_settings">Settings</string>
-
     <string name="service_name">Notification Listener Service</string>
 
     <string name="activity_applist">App List</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="feature">Feature</string>
+    <string name="about">About</string>
+    <string name="open_source">OpenSource</string>
+    <string name="reminder">Intercept reminder</string>
+    <string name="reminder_summary">Intercept notification after the reminder</string>
+    <string name="permission">Set permissions</string>
+    <string name="permission_summary">If the blocking is disabled, reset the permissions</string>
+
+    <string name="no_read_notification_promission">No read notification permissions</string>
 
 </resources>

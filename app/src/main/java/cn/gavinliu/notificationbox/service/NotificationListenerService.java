@@ -14,6 +14,7 @@ import cn.gavinliu.notificationbox.NotificationBoxApp;
 import cn.gavinliu.notificationbox.model.AppInfo;
 import cn.gavinliu.notificationbox.model.NotificationInfo;
 import cn.gavinliu.notificationbox.utils.DbUtils;
+import cn.gavinliu.notificationbox.utils.SettingUtils;
 
 /**
  * Created by Gavin on 2016/10/11.
@@ -76,6 +77,10 @@ public class NotificationListenerService extends android.service.notification.No
                     cancelNotification(sbn.getKey());
                 } else {
                     cancelNotification(sbn.getPackageName(), sbn.getTag(), sbn.getId());
+                }
+
+                if (SettingUtils.getInstance().isNotify()) {
+                    // // TODO: 16-10-26
                 }
             }
         }

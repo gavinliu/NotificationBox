@@ -55,8 +55,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         if (!CommonUtils.checkNotificationReadPermission(this)) {
-            Snackbar.make(mFloatingActionButton, "检测到没有权限", Snackbar.LENGTH_INDEFINITE)
-                    .setAction("设置", new View.OnClickListener() {
+            Snackbar.make(mFloatingActionButton, getText(R.string.no_read_notification_promission), Snackbar.LENGTH_INDEFINITE)
+                    .setAction(getText(R.string.action_settings), new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             Intent intent = new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS");
