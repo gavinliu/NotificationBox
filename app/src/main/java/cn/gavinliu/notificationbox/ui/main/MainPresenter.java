@@ -55,7 +55,12 @@ public class MainPresenter implements MainContract.Presenter {
                     @Override
                     public void onNext(List<AppInfo> appInfos) {
                         mView.showProgress(false);
-                        mView.showApp(appInfos);
+                        if (appInfos == null || appInfos.size() == 0) {
+                            mView.showEmpty();
+                        } else {
+                            mView.showApp(appInfos);
+                        }
+
                     }
                 });
 

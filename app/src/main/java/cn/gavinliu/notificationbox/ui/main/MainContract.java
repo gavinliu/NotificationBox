@@ -27,6 +27,8 @@ public interface MainContract {
 
         void showProgress(boolean isShown);
 
+        void showEmpty();
+
         void showApp(List<AppInfo> apps);
 
         void showAppList();

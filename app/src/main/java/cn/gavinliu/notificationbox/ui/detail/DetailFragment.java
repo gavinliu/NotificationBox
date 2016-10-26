@@ -80,6 +80,13 @@ public class DetailFragment extends BaseListFragment implements DetailContract.V
     }
 
     @Override
+    public void showEmpty() {
+        hideProgressView();
+        showEmptyView();
+        setEmptyText(getText(R.string.empty_detail));
+    }
+
+    @Override
     public void showNotifications(List<NotificationInfo> notifications) {
         mRecyclerView.setAdapter(new Adapter(getContext(), notifications));
     }

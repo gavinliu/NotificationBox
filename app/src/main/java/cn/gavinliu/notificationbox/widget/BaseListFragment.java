@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import cn.gavinliu.notificationbox.R;
 
@@ -18,6 +19,7 @@ public abstract class BaseListFragment extends BaseFragment {
     protected View mView;
     protected RecyclerView mRecyclerView;
     protected View mEmptyLayout;
+    protected TextView mEmptyText;
     protected View mProgressLayout;
 
     @Override
@@ -34,6 +36,7 @@ public abstract class BaseListFragment extends BaseFragment {
             mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
             mEmptyLayout = view.findViewById(R.id.empty_layout);
             mProgressLayout = view.findViewById(R.id.progress_layout);
+            mEmptyText = (TextView) view.findViewById(R.id.empty_text);
         }
 
         setupRecyclerView(mRecyclerView);
@@ -53,6 +56,10 @@ public abstract class BaseListFragment extends BaseFragment {
 
     protected void hideProgressView() {
         mProgressLayout.setVisibility(View.GONE);
+    }
+
+    protected void setEmptyText(CharSequence text){
+        mEmptyText.setText(text);
     }
 
     protected void setupRecyclerView(RecyclerView recyclerView) {

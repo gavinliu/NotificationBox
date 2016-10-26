@@ -62,10 +62,19 @@ public class MainFragment extends BaseListFragment implements MainContract.View 
     @Override
     public void showProgress(boolean isShown) {
         if (isShown) {
+            hideEmptyView();
             showProgressView();
         } else {
             hideProgressView();
         }
+    }
+
+    @Override
+    public void showEmpty() {
+        hideProgressView();
+        showEmptyView();
+        showApp(null);
+        setEmptyText(getText(R.string.empty_app));
     }
 
     @Override

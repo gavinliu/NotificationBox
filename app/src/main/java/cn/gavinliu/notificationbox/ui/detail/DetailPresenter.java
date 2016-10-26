@@ -1,5 +1,8 @@
 package cn.gavinliu.notificationbox.ui.detail;
 
+import java.util.List;
+
+import cn.gavinliu.notificationbox.model.NotificationInfo;
 import cn.gavinliu.notificationbox.utils.DbUtils;
 import rx.subscriptions.CompositeSubscription;
 
@@ -29,7 +32,13 @@ public class DetailPresenter implements DetailContract.Presenter {
     public void startLoad(String packageName) {
         mView.showProgress(false);
 
-        mView.showNotifications(DbUtils.getNotification(packageName));
+        List<NotificationInfo> infos = DbUtils.getNotification(packageName);
+
+        if (infos == null || infos.size() == 0) {
+            mView.showEmpty();
+        } else {
+            mView.showNotifications(infos);
+        }
     }
 
     @Override

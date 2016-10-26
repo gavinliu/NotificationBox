@@ -22,6 +22,8 @@ public interface DetailContract {
 
         void showProgress(boolean isShown);
 
+        void showEmpty();
+
         void showNotifications(List<NotificationInfo> notifications);
     }
 }

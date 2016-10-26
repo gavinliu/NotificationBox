@@ -16,4 +16,7 @@
 
     <string name="no_read_notification_promission">No read notification permissions</string>
 
+    <string name="empty_app">Click on the lower right corner of the button, add the blocking App</string>
+    <string name="empty_detail">The notification message to the app has not yet been intercepted</string>
+
 </resources>
