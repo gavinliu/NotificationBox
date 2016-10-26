@@ -12,11 +12,13 @@
     <string name="reminder">攔截提醒</string>
     <string name="reminder_summary">攔截到消息後提醒</string>
     <string name="permission">配置權限</string>
-    <string name="permission_summary">如果攔截失效，請重新配置權限。（關閉後再打開）</string>
+    <string name="permission_summary">如果攔截失效，請取消權限後，重新配置權限</string>
 
     <string name="no_read_notification_promission">沒有監聽通知欄的權限</string>
 
     <string name="empty_app">點擊右下角的按鈕，添加所需攔截的App</string>
     <string name="empty_detail">還未攔截到該軟件的通知消息</string>
+
+    <string name="notify_blocking">攔截: %1$s</string>
 
 </resources>

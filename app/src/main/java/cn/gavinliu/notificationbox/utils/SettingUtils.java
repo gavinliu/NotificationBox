@@ -2,6 +2,7 @@ package cn.gavinliu.notificationbox.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.v7.preference.PreferenceManager;
 
 import cn.gavinliu.notificationbox.NotificationBoxApp;
 
@@ -28,7 +29,7 @@ public class SettingUtils {
     }
 
     private SettingUtils(Context ctx) {
-        mPreference = ctx.getApplicationContext().getSharedPreferences(ctx.getPackageName() + "_preferences", Context.MODE_PRIVATE);
+        mPreference = PreferenceManager.getDefaultSharedPreferences(ctx);
     }
 
     public boolean isNotify() {

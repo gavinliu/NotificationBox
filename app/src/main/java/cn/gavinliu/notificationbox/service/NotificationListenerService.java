@@ -1,6 +1,8 @@
 package cn.gavinliu.notificationbox.service;
 
 import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Build;
 import android.os.IBinder;
@@ -11,8 +13,10 @@ import android.widget.Toast;
 import java.util.List;
 
 import cn.gavinliu.notificationbox.NotificationBoxApp;
+import cn.gavinliu.notificationbox.R;
 import cn.gavinliu.notificationbox.model.AppInfo;
 import cn.gavinliu.notificationbox.model.NotificationInfo;
+import cn.gavinliu.notificationbox.ui.detail.DetailActivity;
 import cn.gavinliu.notificationbox.utils.DbUtils;
 import cn.gavinliu.notificationbox.utils.SettingUtils;
 
@@ -80,7 +84,7 @@ public class NotificationListenerService extends android.service.notification.No
                 }
 
                 if (SettingUtils.getInstance().isNotify()) {
-                    // // TODO: 16-10-26
+                    createNotification(app.getAppName(), packageName, title, text);
                 }
             }
         }
@@ -89,5 +93,29 @@ public class NotificationListenerService extends android.service.notification.No
     @Override
     public void onNotificationRemoved(StatusBarNotification sbn) {
         super.onNotificationRemoved(sbn);
+    }
+
+    private void createNotification(String appName, String packageName, String title, String text) {
+
+        Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra("appName", appName);
+        intent.putExtra("packageName", packageName);
+
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+
+        Notification.Builder notifyBuilder = new Notification.Builder(this)
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setWhen(System.currentTimeMillis())
+                .setContentTitle(getResources().getString(R.string.notify_blocking, appName))
+                .setContentText(title + ": " + text)
+                .setContentIntent(contentIntent)
+                .setDefaults(Notification.DEFAULT_LIGHTS);
+
+        NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+        Notification notification = notifyBuilder.build();
+        notification.flags |= Notification.FLAG_AUTO_CANCEL;
+
+        nm.notify(R.string.app_name, notification);
     }
 }

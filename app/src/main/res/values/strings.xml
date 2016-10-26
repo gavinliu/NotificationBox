@@ -19,4 +19,6 @@
     <string name="empty_app">Click on the lower right corner of the button, add the blocking App</string>
     <string name="empty_detail">The notification message to the app has not yet been intercepted</string>
 
+    <string name="notify_blocking">Intercept: %1$s</string>
+
 </resources>
