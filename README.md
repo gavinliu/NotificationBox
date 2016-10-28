@@ -1,6 +1,6 @@
 # NotificationBox
 
-![](app/src/mipmap-xxxhdpi/ic_launcher.png)
+![](app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
 
 ![](screenshots.png)
 
