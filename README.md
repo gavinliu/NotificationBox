@@ -1,5 +1,7 @@
 # NotificationBox
 
+![](app/src/mipmap-xxxhdpi/ic_launcher.png)
+
 ![](screenshots.png)
 
 ## Download
